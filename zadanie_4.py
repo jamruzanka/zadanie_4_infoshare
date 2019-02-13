@@ -26,8 +26,13 @@ def player():
         print("Gracz: Kamień")
         return player_choice
     else:
-        print("Żeby wybrać zagranie, wpisz odpowiednią literę.")
-        player_choice()
+        print("Żeby wybrać zagranie, wpisz odpowiednią literę")
+        user_input = input("Twoje zagranie: ")
+        if user_input in ['p','P','n','N','k','K']:
+            player_choice()
+        else:
+            print("Chyba nie potrafisz się zdecydować. Do następnego razu!")
+            exit(0)
 
 def duel():
     player_choice = player()
@@ -35,6 +40,7 @@ def duel():
 
     if player_choice == computer_choice:
         print("Mamy remis!")
+        play_again()
     elif player_choice == 'Papier' and computer_choice == 'Kamień':
         print("Wygrałeś!")
         play_again()
@@ -53,8 +59,18 @@ def play_again():
     user_answer = input('[y/n]')
     if user_answer == 'Y' or user_answer == 'y':
         duel()
-    else:
+    elif user_answer == 'N' or user_answer == 'n':
         exit(0)
+    else:
+        print("Nie rozumiem co chcesz zrobić - wybierz [y], jeśli chcesz grać albo [n], jeśli masz już dość.")
+        user_answer = input('[y/n]')
+        if user_answer == 'Y' or user_answer == 'y':
+            duel()
+        elif user_answer == 'N' or user_answer == 'n':
+            exit(0)
+        else:
+            print("Chyba się nie dogadamy - na dziś koniec!")
+            exit(0)
 
 start_game()
 duel()
